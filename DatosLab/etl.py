@@ -1,12 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
+import re
 
-web =  'https://ciperchile.cl/2019/03/19/menores-que-abandonan-la-escuela-fondos-publicos-para-colegios-de-reinsercion-cayeron-en-1-300-millones/'
-f = etl(text = '',link = web)
-f.ciper()
 
 class etl:
-    #Con __init__ comparto las variabbles en él de forma global
+    #Con __init__ comparto las variables en él, de forma global
     def __init__(self, text, link):
         self.text = text
         self.link = link
@@ -33,7 +31,16 @@ class etl:
         print(self.text[0])
 
     def findCifra(self):
+        patrones = [ (r'\d'), (r'\d\d'), (r'\d\d\d'), (r'\d.\d\d\d'), (r'millones') ]
+        if self.text == '': 
+            print('No se a encontrado el texto')
+        else:
+            cifra = [  re.findall(patr, self.text[0] ) for patr in patrones ]
+            print(cifra)
 
-        for 
 
 
+web =  'https://ciperchile.cl/2019/03/19/menores-que-abandonan-la-escuela-fondos-publicos-para-colegios-de-reinsercion-cayeron-en-1-300-millones/'
+f = etl(text = '',link = web)
+f.ciper()
+f.findCifra()
