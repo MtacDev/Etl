@@ -21,21 +21,21 @@ class etl:
         noti.append(head)
 
         body = soup.find('div', {'class': 'gridle-gr-10 gridle-gr-12@midlarge single__holder print-full'})
-
+        
         #en news se buscan todos los tag <p> dentro del laa variable body peviamente extraida
-        news =  [body.get_text() for ingredient in body.select('p')]
-        noti.append(news)
+        news =  [body.get_text() for p in body.find('p')]
+        noti.append(str(news))
 
         #aca self.text esta apuntando a noti[]
         self.text = noti
-        print(self.text[0])
+        print(self.text[1])
 
     def findCifra(self):
-        patrones = [ (r'\d'), (r'\d\d'), (r'\d\d\d'), (r'\d.\d\d\d'), (r'millones') ]
+        patrones = [ (r'\d.millones'), (r'\d\d.millones'), (r'\d\d\d.millones'), (r'\d.\d\d\d.millones') ]
         if self.text == '': 
             print('No se a encontrado el texto')
         else:
-            cifra = [  re.findall(patr, self.text[0] ) for patr in patrones ]
+            cifra = [  re.findall(patr, self.text[1] ) for patr in patrones ]
             print(cifra)
 
 
